@@ -3,12 +3,29 @@ import { useState } from 'react';
 import FormField from '@/components/FormField';
 import { FaBuilding, FaEnvelope, FaGlobe, FaUser } from 'react-icons/fa';
 
+interface FormData {
+  nom: string;
+  email: string;
+  site: string;
+  entreprise: string;
+}
+
 export default function GeneratePage() {
-  const [form, setForm] = useState({ nom: '', email: '', site: '', entreprise: '' });
-  const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState<FormData>({ 
+    nom: '', 
+    email: '', 
+    site: '', 
+    entreprise: '' 
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ 
+      ...form, 
+      [e.target.name]: e.target.value 
+    });
+  };
 
   const content = `Mentions légales\n\nNom : ${form.nom}\nEntreprise : ${form.entreprise}\nEmail : ${form.email}\nSite : ${form.site}\n...`;
-
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6">
       <div className="max-w-3xl mx-auto space-y-6">

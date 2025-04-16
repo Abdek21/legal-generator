@@ -194,7 +194,7 @@ export default function Home() {
                   ))}
                 </div>
                 <blockquote className="italic text-gray-600 dark:text-gray-300 mb-4">
-                  "{testimonial.quote}"
+                  &quot;{testimonial.quote}&quot;
                 </blockquote>
                 <div className="text-gray-500 dark:text-gray-400">
                   — {testimonial.author}
