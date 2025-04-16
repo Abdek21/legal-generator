@@ -3,7 +3,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FiCheckCircle, FiBriefcase, FiStar, FiChevronRight } from 'react-icons/fi';
-
+import { Analytics } from '@vercel/analytics/react';
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 }
@@ -40,7 +40,7 @@ export default function Home() {
               en moins de 2 minutes
             </span> ⚡
           </motion.h1>
-          
+          <Analytics />
           <motion.p
             initial="hidden"
             animate="visible"
