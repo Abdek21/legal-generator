@@ -1,30 +1,31 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light'); // Défaut en light
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // Charger le thème depuis localStorage, sinon utiliser light par défaut
-    const current = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    setTheme(current || 'light');
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    window.dispatchEvent(new Event('theme-change'));
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    window.dispatchEvent(new Event('theme-change')); // Notifie les composants du changement de thème
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full border border-gray-300 dark:border-gray-600"
-      aria-label={`Basculer en mode ${theme === 'dark' ? 'clair' : 'sombre'}`}
+      aria-label="Toggle dark mode"
+      className="p-2 rounded-full border-2 border-gray-400 dark:border-gray-600 transition-all"
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {theme === 'dark' ? '🌞' : '🌙'}
     </button>
   );
 }
